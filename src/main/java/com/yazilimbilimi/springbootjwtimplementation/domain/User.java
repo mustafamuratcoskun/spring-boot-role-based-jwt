@@ -1,12 +1,20 @@
 package com.yazilimbilimi.springbootjwtimplementation.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
