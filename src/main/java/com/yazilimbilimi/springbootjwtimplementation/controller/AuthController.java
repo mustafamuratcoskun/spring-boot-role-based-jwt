@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     @Autowired
-    private AuthService userService;
+    private AuthService authService;
 
     @PostMapping("/register")
     public String register(@RequestBody UserRegisterDto userRegisterDto) {
-        userService.add(userRegisterDto);
+        authService.register(userRegisterDto);
         return "Successful";
     }
 

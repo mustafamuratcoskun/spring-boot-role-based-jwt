@@ -6,10 +6,12 @@ import com.yazilimbilimi.springbootjwtimplementation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class AuthServiceImpl implements AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -17,12 +19,7 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    @Override
-    public void add(UserRegisterDto userRegisterDto) {
+    public void register(UserRegisterDto userRegisterDto) {
         User user = User
                 .builder()
                 .email(userRegisterDto.getEmail())
@@ -30,5 +27,6 @@ public class AuthServiceImpl implements AuthService {
                 .password(passwordEncoder.encode(userRegisterDto.getPassword()))
                 .build();
         userRepository.save(user);
+
     }
 }

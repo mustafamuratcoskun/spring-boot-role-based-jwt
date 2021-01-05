@@ -6,6 +6,5 @@ import com.yazilimbilimi.springbootjwtimplementation.domain.dto.UserRegisterDto;
 import java.util.List;
 
 public interface AuthService {
-    List<User> getAllUsers();
-    void add(UserRegisterDto userRegisterDto);
+    void register(UserRegisterDto userRegisterDto);
 }
