@@ -1,5 +1,6 @@
 package com.yazilimbilimi.springbootjwtimplementation.controller;
 
+import com.yazilimbilimi.springbootjwtimplementation.domain.dto.UserLoginDto;
 import com.yazilimbilimi.springbootjwtimplementation.domain.dto.UserRegisterDto;
 import com.yazilimbilimi.springbootjwtimplementation.service.AuthService;
 import org.slf4j.Logger;
@@ -29,6 +30,12 @@ public class AuthController {
         return ResponseEntity.ok("User Registered Succesfully");
 
     }
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UserLoginDto userLoginDto) {
+        authService.login(userLoginDto);
+        
+    }
+
 
 
 
