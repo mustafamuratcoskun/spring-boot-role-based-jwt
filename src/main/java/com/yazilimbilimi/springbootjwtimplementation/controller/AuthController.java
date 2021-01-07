@@ -3,6 +3,7 @@ package com.yazilimbilimi.springbootjwtimplementation.controller;
 import com.yazilimbilimi.springbootjwtimplementation.domain.dto.UserLoginDto;
 import com.yazilimbilimi.springbootjwtimplementation.domain.dto.UserRegisterDto;
 import com.yazilimbilimi.springbootjwtimplementation.service.AuthService;
+import com.yazilimbilimi.springbootjwtimplementation.util.Constants.ApiMessages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,13 @@ public class AuthController {
     public ResponseEntity<String> register(@RequestBody UserRegisterDto userRegisterDto) {
 
         authService.register(userRegisterDto);
-        return ResponseEntity.ok("User Registered Succesfully");
+        return ResponseEntity.ok(ApiMessages.REGISTRATION_SUCCESSFUL);
 
     }
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserLoginDto userLoginDto) {
         authService.login(userLoginDto);
-        
+        return ResponseEntity.ok(ApiMessages.LOGIN_SUCCESSFUL);
     }
 
 

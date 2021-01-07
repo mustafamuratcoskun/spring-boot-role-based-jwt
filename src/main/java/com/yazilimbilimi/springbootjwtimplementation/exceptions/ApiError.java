@@ -18,13 +18,11 @@ public class ApiError {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime createdAt;
     private String message;
-    private Set<ApiSubError> apiSubErrors = new HashSet<>();
 
     public ApiError(Builder builder) {
         this.httpStatus = builder.httpStatus;
         this.createdAt = builder.createdAt;
         this.message = builder.message;
-        this.apiSubErrors = builder.apiSubErrors;
     }
 
      static class Builder {
@@ -32,7 +30,6 @@ public class ApiError {
         private String message;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
         private LocalDateTime createdAt;
-        private Set<ApiSubError> apiSubErrors = new HashSet<>();
 
         public Builder(){}
 
@@ -48,10 +45,7 @@ public class ApiError {
             this.message = message;
             return this;
         }
-        public Builder withSubApiErrors(Set<ApiSubError> apiSubErrors) {
-            this.apiSubErrors = apiSubErrors;
-            return this;
-        }
+
         public ApiError build(){
             return new ApiError(this);
         }

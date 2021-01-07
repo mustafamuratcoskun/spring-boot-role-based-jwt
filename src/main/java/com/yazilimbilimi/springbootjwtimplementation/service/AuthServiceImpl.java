@@ -7,23 +7,18 @@ import com.yazilimbilimi.springbootjwtimplementation.domain.dto.UserRegisterDto;
 import com.yazilimbilimi.springbootjwtimplementation.exceptions.security.CustomSecurityException;
 import com.yazilimbilimi.springbootjwtimplementation.repository.RoleRepository;
 import com.yazilimbilimi.springbootjwtimplementation.repository.UserRepository;
-import com.yazilimbilimi.springbootjwtimplementation.util.ApiMessages;
-import lombok.AllArgsConstructor;
+import com.yazilimbilimi.springbootjwtimplementation.util.Constants.ApiMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 
