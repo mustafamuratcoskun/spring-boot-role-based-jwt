@@ -14,12 +14,15 @@ import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
+
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -27,20 +30,27 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private  RoleRepository roleRepository;
 
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         User user = userRepository
                 .findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username : " + username));
-        return org.springframework.security.core.userdetails.User
+
+        Set<Role> roles = user.getRoles();
+
+       return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .authorities(getSimpleGrantedAuthorities(user.getRoles()))
+                .authorities(getSimpleGrantedAuthorities(roles))
                 .accountExpired(false)
                 .accountLocked(false)
                 .disabled(false)
                 .credentialsExpired(false)
                 .build();
+
+
 
     }
     private Set<GrantedAuthority> getSimpleGrantedAuthorities(Set<Role> roles){

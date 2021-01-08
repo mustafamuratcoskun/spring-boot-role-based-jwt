@@ -1,5 +1,7 @@
 package com.yazilimbilimi.springbootjwtimplementation.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,12 +12,11 @@ import java.util.Set;
 
 
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor()
 @Entity
-@Builder
 @Table(name = "users")
 public class User extends BaseEntity {
 
@@ -31,18 +32,26 @@ public class User extends BaseEntity {
     @Column(name = "password")
     private String password;
 
+
     @ManyToMany
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(
-                    name = "user_id",referencedColumnName = "id"
-            ),
+            name = "user_id",referencedColumnName = "id"
+    ),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id",referencedColumnName = "id"
             )
     )
     private Set<Role> roles  = new HashSet<>();
 
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + getId() + '\'' +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

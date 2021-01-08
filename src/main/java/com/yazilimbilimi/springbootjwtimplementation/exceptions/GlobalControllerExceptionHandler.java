@@ -1,5 +1,6 @@
 package com.yazilimbilimi.springbootjwtimplementation.exceptions;
 
+import com.yazilimbilimi.springbootjwtimplementation.exceptions.security.CustomSecurityException;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -35,8 +36,23 @@ public class GlobalControllerExceptionHandler {
         return new ResponseEntity<>(apiError,apiError.getHttpStatus());
 
     }
+    @ExceptionHandler(CustomSecurityException.class)
+    public ResponseEntity<Object> handleCustomSecurityException(CustomSecurityException ex){
+        ApiError apiError = new ApiError.
+                Builder()
+                .withMessage(ex.getMessage())
+                .withHttpStatus(ex.getHttpStatus())
+                .withCreatedAt()
+                .build();
+
+        return new ResponseEntity<>(apiError,apiError.getHttpStatus());
+
+    }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGenericException(Exception exception){
+
+        logger.error(exception.getMessage(),exception);
+
         ApiError apiError = new ApiError.
                 Builder()
                 .withMessage("Some Error Occurred")

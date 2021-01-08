@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @NoArgsConstructor
-
 public class CustomSecurityException extends RuntimeException {
 
     private String message;
