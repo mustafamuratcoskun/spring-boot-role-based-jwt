@@ -4,6 +4,7 @@ import com.yazilimbilimi.springbootjwtimplementation.exceptions.security.CustomS
 import com.yazilimbilimi.springbootjwtimplementation.util.Security.AccessToken;
 import com.yazilimbilimi.springbootjwtimplementation.util.Security.ITokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,7 @@ public class TokenFilter extends OncePerRequestFilter {
     private ITokenProvider tokenProvider;
 
     @Override
+
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         AccessToken accessToken = tokenProvider.getTokenFromHeader(httpServletRequest);
         try {
